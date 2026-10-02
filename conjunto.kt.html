@@ -1,0 +1,148 @@
+<html>
+<head>
+<title>conjunto.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#191a1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+conjunto.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">fun </span><span class="s1">main</span><span class="s2">() {</span>
+    <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;--- QUESTÃO 1 ---&quot;</span><span class="s2">)</span>
+    <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Com PROMO10: R$ </span><span class="s0">${</span><span class="s1">calcularDesconto</span><span class="s2">(</span><span class="s4">100.0</span><span class="s2">, </span><span class="s3">&quot;PROMO10&quot;</span><span class="s2">)</span><span class="s0">}</span><span class="s3">&quot;</span><span class="s2">)</span>
+    <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Com PROMO20: R$ </span><span class="s0">${</span><span class="s1">calcularDesconto</span><span class="s2">(</span><span class="s4">100.0</span><span class="s2">, </span><span class="s3">&quot;PROMO20&quot;</span><span class="s2">)</span><span class="s0">}</span><span class="s3">&quot;</span><span class="s2">)</span>
+    <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Com Cupom Inválido: R$ </span><span class="s0">${</span><span class="s1">calcularDesconto</span><span class="s2">(</span><span class="s4">100.0</span><span class="s2">, </span><span class="s3">&quot;INVALIDO&quot;</span><span class="s2">)</span><span class="s0">}</span><span class="s3">&quot;</span><span class="s2">)</span>
+    <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Sem Cupom (null): R$ </span><span class="s0">${</span><span class="s1">calcularDesconto</span><span class="s2">(</span><span class="s4">100.0</span><span class="s2">, </span><span class="s0">null</span><span class="s2">)</span><span class="s0">}</span><span class="s3">&quot;</span><span class="s2">)</span>
+
+    <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">--- QUESTÃO 2 ---&quot;</span><span class="s2">)</span>
+    <span class="s0">val </span><span class="s1">enderecos </span><span class="s2">= </span><span class="s1">listOf</span><span class="s2">(</span><span class="s3">&quot;Rua das Flores, 123&quot;</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s3">&quot;Av. Brasil, 456&quot;</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s3">&quot;Rua XV de Novembro, 789&quot;</span><span class="s2">)</span>
+    <span class="s1">auditarEntregas</span><span class="s2">(</span><span class="s1">enderecos</span><span class="s2">)</span>
+
+    <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">--- QUESTÃO 3 ---&quot;</span><span class="s2">)</span>
+    <span class="s1">validarBioInfantil</span><span class="s2">(</span><span class="s3">&quot;Gosto de desenhar e brincar no parque.&quot;</span><span class="s2">)</span>
+    <span class="s1">validarBioInfantil</span><span class="s2">(</span><span class="s3">&quot;Esta é uma biografia absurdamente longa para uma criança pequena que ultrapassa cinquenta caracteres de limite com facilidade.&quot;</span><span class="s2">)</span>
+    <span class="s1">validarBioInfantil</span><span class="s2">(</span><span class="s0">null</span><span class="s2">)</span>
+
+    <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">--- QUESTÃO 4 ---&quot;</span><span class="s2">)</span>
+    <span class="s1">processarTransacoesPix</span><span class="s2">()</span>
+
+    <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">--- QUESTÃO 5 ---&quot;</span><span class="s2">)</span>
+    <span class="s1">avaliarMotorista</span><span class="s2">(</span><span class="s4">5</span><span class="s2">)</span>
+    <span class="s1">avaliarMotorista</span><span class="s2">(</span><span class="s4">3</span><span class="s2">)</span>
+    <span class="s1">avaliarMotorista</span><span class="s2">(</span><span class="s0">null</span><span class="s2">)</span>
+
+    <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">--- QUESTÃO 6 ---&quot;</span><span class="s2">)</span>
+    <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Gorjeta de R$ 15.0: R$ </span><span class="s0">${</span><span class="s1">calcularGorjeta</span><span class="s2">(</span><span class="s4">15.0</span><span class="s2">)</span><span class="s0">}</span><span class="s3">&quot;</span><span class="s2">)</span>
+    <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Gorjeta nula: R$ </span><span class="s0">${</span><span class="s1">calcularGorjeta</span><span class="s2">(</span><span class="s0">null</span><span class="s2">)</span><span class="s0">}</span><span class="s3">&quot;</span><span class="s2">)</span>
+    <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Gorjeta negativa: R$ </span><span class="s0">${</span><span class="s1">calcularGorjeta</span><span class="s2">(-</span><span class="s4">5.0</span><span class="s2">)</span><span class="s0">}</span><span class="s3">&quot;</span><span class="s2">)</span>
+
+    <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">--- QUESTÃO 7 ---&quot;</span><span class="s2">)</span>
+    <span class="s0">val </span><span class="s1">listaEmails </span><span class="s2">= </span><span class="s1">listOf</span><span class="s2">(</span><span class="s3">&quot;usuario@email.com&quot;</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s3">&quot;&quot;</span><span class="s2">, </span><span class="s3">&quot;   &quot;</span><span class="s2">, </span><span class="s3">&quot;dev@kotlin.org&quot;</span><span class="s2">)</span>
+    <span class="s1">limparBancoDeDados</span><span class="s2">(</span><span class="s1">listaEmails</span><span class="s2">)</span>
+<span class="s2">}</span>
+
+<span class="s5">// ==========================================</span>
+<span class="s5">// QUESTÃO 1: Sistema de Cupons Avançado</span>
+<span class="s5">// ==========================================</span>
+<span class="s0">fun </span><span class="s1">calcularDesconto</span><span class="s2">(</span><span class="s1">valor: Double</span><span class="s2">, </span><span class="s1">cupom: String?</span><span class="s2">)</span><span class="s1">: Double </span><span class="s2">= </span><span class="s0">when </span><span class="s2">(</span><span class="s1">cupom</span><span class="s2">) {</span>
+    <span class="s3">&quot;PROMO10&quot; </span><span class="s2">-&gt; </span><span class="s1">valor </span><span class="s2">- </span><span class="s4">10.0</span>
+    <span class="s3">&quot;PROMO20&quot; </span><span class="s2">-&gt; </span><span class="s1">valor </span><span class="s2">- </span><span class="s4">20.0</span>
+    <span class="s0">else </span><span class="s2">-&gt; </span><span class="s1">valor</span>
+<span class="s2">}</span>
+
+<span class="s5">// ==========================================</span>
+<span class="s5">// QUESTÃO 2: Auditoria de Entregas</span>
+<span class="s5">// ==========================================</span>
+<span class="s0">fun </span><span class="s1">auditarEntregas</span><span class="s2">(</span><span class="s1">enderecos: List</span><span class="s2">&lt;</span><span class="s1">String?</span><span class="s2">&gt;) {</span>
+    <span class="s0">for </span><span class="s2">(</span><span class="s1">item </span><span class="s0">in </span><span class="s1">enderecos</span><span class="s2">) {</span>
+        <span class="s0">val </span><span class="s1">enderecoFinal </span><span class="s2">= </span><span class="s1">item ?: </span><span class="s3">&quot;Endereço Desconhecido&quot;</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">enderecoFinal </span><span class="s2">== </span><span class="s3">&quot;Endereço Desconhecido&quot;</span><span class="s2">) {</span>
+            <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Entrega Pendente: Falta de dados&quot;</span><span class="s2">)</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Rota traçada para: </span><span class="s0">$</span><span class="s1">enderecoFinal</span><span class="s3">&quot;</span><span class="s2">)</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s5">// ==========================================</span>
+<span class="s5">// QUESTÃO 3: Validação de Perfil de Streaming</span>
+<span class="s5">// ==========================================</span>
+<span class="s0">fun </span><span class="s1">validarBioInfantil</span><span class="s2">(</span><span class="s1">bio: String?</span><span class="s2">) {</span>
+    <span class="s0">val </span><span class="s1">tamanho </span><span class="s2">= </span><span class="s1">bio?</span><span class="s2">.</span><span class="s1">length ?: </span><span class="s4">0</span>
+    <span class="s0">if </span><span class="s2">(</span><span class="s1">tamanho </span><span class="s2">&lt;= </span><span class="s4">50</span><span class="s2">) {</span>
+        <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Bio aceita&quot;</span><span class="s2">)</span>
+    <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+        <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Bio muito longa&quot;</span><span class="s2">)</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s5">// ==========================================</span>
+<span class="s5">// QUESTÃO 4: Processamento de Transações Pix</span>
+<span class="s5">// ==========================================</span>
+<span class="s0">fun </span><span class="s1">processarTransacoesPix</span><span class="s2">() {</span>
+    <span class="s0">val </span><span class="s1">transacoes: List</span><span class="s2">&lt;</span><span class="s1">Double?</span><span class="s2">&gt; = </span><span class="s1">listOf</span><span class="s2">(</span><span class="s4">50.0</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s4">120.5</span><span class="s2">, </span><span class="s0">null</span><span class="s2">, </span><span class="s4">10.0</span><span class="s2">)</span>
+
+    <span class="s0">val </span><span class="s1">total </span><span class="s2">= </span><span class="s1">transacoes</span><span class="s2">.</span><span class="s1">sumOf </span><span class="s2">{ </span><span class="s1">valor </span><span class="s2">-&gt;</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">valor </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">valor</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Transação ignorada&quot;</span><span class="s2">)</span>
+            <span class="s4">0.0</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Total processado: R$ </span><span class="s0">$</span><span class="s1">total</span><span class="s3">&quot;</span><span class="s2">)</span>
+<span class="s2">}</span>
+
+<span class="s5">// ==========================================</span>
+<span class="s5">// QUESTÃO 5: Classificação de Feedback de Motoristas</span>
+<span class="s5">// ==========================================</span>
+<span class="s0">fun </span><span class="s1">avaliarMotorista</span><span class="s2">(</span><span class="s1">nota: Int?</span><span class="s2">) {</span>
+    <span class="s0">when </span><span class="s2">(</span><span class="s1">nota ?: </span><span class="s4">0</span><span class="s2">) {</span>
+        <span class="s4">5 </span><span class="s2">-&gt; </span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Excelente corrida!&quot;</span><span class="s2">)</span>
+        <span class="s4">4 </span><span class="s2">-&gt; </span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Boa corrida.&quot;</span><span class="s2">)</span>
+        <span class="s4">1</span><span class="s2">, </span><span class="s4">2</span><span class="s2">, </span><span class="s4">3 </span><span class="s2">-&gt; </span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Precisamos melhorar.&quot;</span><span class="s2">)</span>
+        <span class="s4">0 </span><span class="s2">-&gt; </span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Nenhuma avaliação fornecida.&quot;</span><span class="s2">)</span>
+        <span class="s0">else </span><span class="s2">-&gt; </span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Nota fora do intervalo válido.&quot;</span><span class="s2">)</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s5">// ==========================================</span>
+<span class="s5">// QUESTÃO 6: Função Lambda para Cálculo de Gorjeta</span>
+<span class="s5">// ==========================================</span>
+<span class="s0">val </span><span class="s1">calcularGorjeta: </span><span class="s2">(</span><span class="s1">Double?</span><span class="s2">) -&gt; </span><span class="s1">Double </span><span class="s2">= {</span>
+    <span class="s0">if </span><span class="s2">((</span><span class="s1">it ?: </span><span class="s4">0.0</span><span class="s2">) &gt; </span><span class="s4">0.0</span><span class="s2">) </span><span class="s1">it</span><span class="s2">!! </span><span class="s0">else </span><span class="s4">0.0</span>
+<span class="s2">}</span>
+
+<span class="s5">// ==========================================</span>
+<span class="s5">// QUESTÃO 7: Limpeza de Banco de Dados de Usuários</span>
+<span class="s5">// ==========================================</span>
+<span class="s0">fun </span><span class="s1">limparBancoDeDados</span><span class="s2">(</span><span class="s1">emails: List</span><span class="s2">&lt;</span><span class="s1">String?</span><span class="s2">&gt;) {</span>
+    <span class="s0">var </span><span class="s1">contasInvalidas </span><span class="s2">= </span><span class="s4">0</span>
+
+    <span class="s0">for </span><span class="s2">(</span><span class="s1">email </span><span class="s0">in </span><span class="s1">emails</span><span class="s2">) {</span>
+        <span class="s5">// Safe call com elvis operator tratando verificação de string em branco/nula</span>
+        <span class="s0">val </span><span class="s1">ehInvalido </span><span class="s2">= </span><span class="s1">email?</span><span class="s2">.</span><span class="s1">isBlank</span><span class="s2">() </span><span class="s1">?: </span><span class="s0">true</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">ehInvalido</span><span class="s2">) {</span>
+            <span class="s1">contasInvalidas</span><span class="s2">++</span>
+            <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Aviso de deleção: Conta inválida e marcada para remoção.&quot;</span><span class="s2">)</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Conta válida: </span><span class="s0">$</span><span class="s1">email</span><span class="s3">&quot;</span><span class="s2">)</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Total de contas que precisam ser apagadas: </span><span class="s0">$</span><span class="s1">contasInvalidas</span><span class="s3">&quot;</span><span class="s2">)</span>
+<span class="s2">}</span></pre>
+</body>
+</html>
